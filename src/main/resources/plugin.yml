@@ -1,17 +1,11 @@
 name: '${project.name}'
 version: '${project.version}'
-main: me.d2siado.dev.Packages
+main: me.d2siado.dev.Lootbox
 authors: [ D2SI4DO ]
-description: A special plugin of packages like AstralMC
+description: A special plugin of lootbox like AstralMC
 commands:
-  package:
+  lootbox:
     aliases:
-      - packages
-      - partnerpackages
-      - specialbox
       - lootbox
       - box
-      - zyonpackages
-      - zyonbox
-      - zyonloot
     description: The principal command of the plugin

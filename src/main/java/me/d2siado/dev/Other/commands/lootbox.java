@@ -27,7 +27,7 @@ public class lootbox implements CommandExecutor {
                     , ("")).forEach(m -> sender.sendMessage(CC.translate(m)));
             return true;
         } else if ("give".equalsIgnoreCase(strings[0])) {
-            if (!(sender.hasPermission(Lootbox.getInstance().getName() + ".give") || sender.hasPermission(Lootbox.getInstance().getName() + ".*"))) {
+            if (!(sender.hasPermission("lootbox.give") || sender.hasPermission("lootbox.*"))) {
                 sender.sendMessage(CC.translate("&cYou not have permissions to use this subcommand..."));
                 return true;
             }
@@ -59,7 +59,7 @@ public class lootbox implements CommandExecutor {
                 sender.sendMessage(CC.translate("&cOnly players can run this subcommand..."));
                 return true;
             }
-            ((Player) sender).openInventory(Stacks.getLootInventory((sender.hasPermission(Lootbox.getInstance().getName() + ".loot") || sender.hasPermission(Lootbox.getInstance().getName() + ".*"))));
+            ((Player) sender).openInventory(Stacks.getLootInventory((sender.hasPermission("lootbox.loot") || sender.hasPermission("lootbox.*"))));
         } else if ("about".equalsIgnoreCase(strings[0])) {
             Arrays.asList(("")
                     , ("&6&l" + Lootbox.getInstance().getName())
@@ -68,7 +68,7 @@ public class lootbox implements CommandExecutor {
                     , ("  &eAuthor:&f " + Lootbox.getInstance().getDescription().getAuthors().toString())
                     , ("")).forEach(m -> sender.sendMessage(CC.translate(m)));
         } else if ("reload".equalsIgnoreCase(strings[0])) {
-            if (!(sender.hasPermission(Lootbox.getInstance().getName() + ".reload") || sender.hasPermission(Lootbox.getInstance().getName() + ".*"))) {
+            if (!(sender.hasPermission("lootbox.reload") || sender.hasPermission("lootbox.*"))) {
                 sender.sendMessage(CC.translate("&cYou not have permissions to use this subcommand..."));
                 return true;
             }

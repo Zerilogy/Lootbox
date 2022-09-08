@@ -22,7 +22,11 @@ public class lootbox implements Listener {
             if (e.getItem() != null && e.getItem().isSimilar(Stacks.getLootboxItem(1))) {
                 e.getPlayer().openInventory(Stacks.getBoxInventory());
                 e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CHEST_OPEN, 1.0F, 1.0F);
-                e.setCancelled(true);
+                if (e.getItem().getAmount() > 1) {
+                    e.getItem().setAmount(e.getItem().getAmount()-1);
+                } else {
+                    e.getPlayer().setItemInHand(null);
+                }
             }
         }
     }

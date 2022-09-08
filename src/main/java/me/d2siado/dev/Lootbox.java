@@ -1,7 +1,7 @@
 /*
- | me.d2siado.dev.Packages Plugin
+ | me.d2siado.dev.Lootbox Plugin
  | this plugin was maked by D2SIADO#0001
- | 4/09/2022 ! me.d2siado.dev.Packages.java
+ | 4/09/2022 ! me.d2siado.dev.Lootbox.java
  | Dependencies Maven:
  |  - Spigot
  |
@@ -55,7 +55,7 @@ public final class Lootbox extends JavaPlugin
         getData();
         Glow.registerGlow();
         Plugin.registerListeners(Arrays.asList(new lootbox()));
-        getServer().getPluginCommand("package").setExecutor(new me.d2siado.dev.Other.commands.lootbox());
-        CC.logWith(Arrays.asList("&aPlugin is enabled correctly, Packages works","&bA custom plugin to ZyonPvP, maked by D2SI4DO"));
+        getServer().getPluginCommand("lootbox").setExecutor(new me.d2siado.dev.Other.commands.lootbox());
+        CC.logWith(Arrays.asList("&aPlugin is enabled correctly, Lootbox works","&aA custom plugin to ZyonPvP, maked by D2SI4DO"));
     }
 }
