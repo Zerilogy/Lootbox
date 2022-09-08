@@ -1,0 +1,22 @@
+# This plugins is a copy of astralmc lootbox
+# if you need help please contact me in discord D2SIADO#0001
+# this proyect was maked for ZyonPvP HCFactions and Kitmap...
+# -----------------------------------------------------------
+# | Social:
+# |  - _ede.sal in instagram
+# |  - D2SIADO#0001 in discord
+# |  - D2SIADO in twitter
+# -----------------------------------------------------------
+ICON:
+  DISPLAY-NAME: '&6&lZyonPvP &fPackage'
+  MATERIAL: ENDER_CHEST
+  MATERIAL-DATA: 0
+  LORE:
+    - '&7» Right click to open the package'
+CONFIG:
+  AMOUNT: 2 # 1 or 2, if is higher the config was 2
+  PANES:
+    TYPES: [1,2,3,4,5,6,14]
+    GLOW: true
+MESSAGES:
+  RECEIVE: "&aYou have received x%amount% %reward% &aon Package"

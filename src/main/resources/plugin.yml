@@ -1,0 +1,17 @@
+name: '${project.name}'
+version: '${project.version}'
+main: me.d2siado.dev.Packages
+authors: [ D2SI4DO ]
+description: A special plugin of packages like AstralMC
+commands:
+  package:
+    aliases:
+      - packages
+      - partnerpackages
+      - specialbox
+      - lootbox
+      - box
+      - zyonpackages
+      - zyonbox
+      - zyonloot
+    description: The principal command of the plugin
