@@ -1,8 +1,8 @@
 name: '${project.name}'
 version: '${project.version}'
-main: me.d2siado.dev.Lootbox
+main: me.d2siado.dev.LootBox
 authors: [ D2SI4DO ]
-description: A special plugin of lootbox like AstralMC
+description: A special plugin of LootBox like AstralMC
 commands:
   lootbox:
     aliases:

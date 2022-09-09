@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.d2siado.dev</groupId>
-    <artifactId>Lootbox</artifactId>
+    <artifactId>LootBox</artifactId>
     <version>1.0-SnapShot</version>
     <packaging>jar</packaging>
 
-    <name>Lootbox</name>
+    <name>LootBox</name>
 
-    <description>A special plugin of lootbox like astralmc</description>
+    <description>A special plugin of LootBox like astralmc</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

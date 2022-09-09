@@ -1,7 +1,7 @@
 /*
- | me.d2siado.dev.Lootbox Plugin
+ | me.d2siado.dev.LootBox Plugin
  | this plugin was maked by D2SIADO#0001
- | 4/09/2022 ! me.d2siado.dev.Lootbox.java
+ | 4/09/2022 ! me.d2siado.dev.LootBox.java
  | Dependencies Maven:
  |  - Spigot
  |
@@ -22,14 +22,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
 
-public final class Lootbox extends JavaPlugin
+public final class LootBox extends JavaPlugin
 {
-    private static Lootbox instance;
+    private static LootBox instance;
 
     /*
      - Other
      */
-    public static Lootbox getInstance() {
+    public static LootBox getInstance() {
         return instance;
     }
 
@@ -56,6 +56,6 @@ public final class Lootbox extends JavaPlugin
         Glow.registerGlow();
         Plugin.registerListeners(Arrays.asList(new lootbox()));
         getServer().getPluginCommand("lootbox").setExecutor(new me.d2siado.dev.Other.commands.lootbox());
-        CC.logWith(Arrays.asList("&aPlugin is enabled correctly, Lootbox works","&aA custom plugin to ZyonPvP, maked by D2SI4DO"));
+        CC.logWith(Arrays.asList("&aPlugin is enabled correctly, LootBox works","&aA custom plugin to ZyonPvP, maked by D2SI4DO"));
     }
 }

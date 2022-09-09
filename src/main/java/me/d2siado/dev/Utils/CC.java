@@ -1,6 +1,6 @@
 package me.d2siado.dev.Utils;
 
-import me.d2siado.dev.Lootbox;
+import me.d2siado.dev.LootBox;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -25,10 +25,10 @@ public class CC {
     }
 
     public static void logWith(String msg) {
-        Bukkit.getConsoleSender().sendMessage(CC.translate("&e[&b" + Lootbox.getInstance().getName() + "&e]&r " + msg));
+        Bukkit.getConsoleSender().sendMessage(CC.translate("&e[&b" + LootBox.getInstance().getName() + "&e]&r " + msg));
     }
 
     public static void logWith(List<String> msg) {
-        msg.forEach(msgs -> Bukkit.getConsoleSender().sendMessage(CC.translate("&e[&b" + Lootbox.getInstance().getName() + "&e]&r " + msgs)));
+        msg.forEach(msgs -> Bukkit.getConsoleSender().sendMessage(CC.translate("&e[&b" + LootBox.getInstance().getName() + "&e]&r " + msgs)));
     }
 }

@@ -1,6 +1,6 @@
 package me.d2siado.dev.Other.events;
 
-import me.d2siado.dev.Lootbox;
+import me.d2siado.dev.LootBox;
 import me.d2siado.dev.Utils.CC;
 import me.d2siado.dev.Utils.Plugin;
 import me.d2siado.dev.Utils.Stacks;
@@ -20,13 +20,29 @@ public class lootbox implements Listener {
     public void onOpen(PlayerInteractEvent e) {
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             if (e.getItem() != null && e.getItem().isSimilar(Stacks.getLootboxItem(1))) {
-                e.getPlayer().openInventory(Stacks.getBoxInventory());
-                e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CHEST_OPEN, 1.0F, 1.0F);
+                e.setCancelled(true);
+                e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.valueOf(LootBox.getInstance().getConfig().getString("CONFIG.SOUNDS.OPEN")), 1.0F, 1.0F);
                 if (e.getItem().getAmount() > 1) {
                     e.getItem().setAmount(e.getItem().getAmount()-1);
                 } else {
                     e.getPlayer().setItemInHand(null);
                 }
+                if (e.getPlayer().isSneaking() && LootBox.getInstance().getConfig().getBoolean("CONFIG.FAST-OPEN")) {
+                    int repeats = (LootBox.getInstance().getConfig().getInt("CONFIG.AMOUNT")==1)?1:2;
+                    for (int i = 0; i < repeats; i++) {
+                        ItemStack stack = Plugin.getRandomItem().clone();
+                        String reward = (stack.getItemMeta().getDisplayName() != null) ? stack.getItemMeta().getDisplayName() : stack.getType().name();
+                        e.getPlayer().sendMessage(CC.translate(LootBox.getInstance().getConfig().getString("MESSAGES.RECEIVE").replace("%amount%", String.valueOf(stack.getAmount())).replace("%reward%", reward)));
+                        e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.valueOf(LootBox.getInstance().getConfig().getString("CONFIG.SOUNDS.OPEN")), 1.0F, 1.0F);
+                        if (!Plugin.isFull(e.getPlayer())) {
+                            e.getPlayer().getInventory().addItem(stack);
+                        } else {
+                            e.getPlayer().getWorld().dropItem(e.getPlayer().getLocation(), stack);
+                        }
+                    }
+                    return;
+                }
+                e.getPlayer().openInventory(Stacks.getBoxInventory());
             }
         }
     }
@@ -44,8 +60,9 @@ public class lootbox implements Listener {
             if (e.getCurrentItem().isSimilar(Stacks.getRandomItem())) {
                 ItemStack stack = Plugin.getRandomItem().clone();
                 String reward = (stack.getItemMeta().getDisplayName() != null) ? stack.getItemMeta().getDisplayName() : stack.getType().name();
-                p.sendMessage(CC.translate(Lootbox.getInstance().getConfig().getString("MESSAGES.RECEIVE").replace("%amount%", String.valueOf(stack.getAmount())).replace("%reward%", reward)));
+                p.sendMessage(CC.translate(LootBox.getInstance().getConfig().getString("MESSAGES.RECEIVE").replace("%amount%", String.valueOf(stack.getAmount())).replace("%reward%", reward)));
                 e.getInventory().setItem(e.getRawSlot(), stack);
+                p.playSound(p.getLocation(), Sound.valueOf(LootBox.getInstance().getConfig().getString("CONFIG.SOUNDS.REWARDS")), 1.0F, 1.0F);
                 if (!Plugin.isFull(p)) {
                     p.getInventory().addItem(stack);
                     return;
@@ -71,15 +88,15 @@ public class lootbox implements Listener {
             for (ItemStack stacks : content) {
                 ++ib;
                 if (stacks != null && !stacks.getType().equals(Material.AIR)) {
-                    if (Lootbox.getInstance().getData().get("ITEMS." + ib) != null) {
-                        ItemStack stack = Lootbox.getInstance().getData().getItemStack("ITEMS." + ib + ".ITEM").clone();
+                    if (LootBox.getInstance().getData().get("ITEMS." + ib) != null) {
+                        ItemStack stack = LootBox.getInstance().getData().getItemStack("ITEMS." + ib + ".ITEM").clone();
                         if (stack.isSimilar(stacks)) continue;
                     }
-                    Lootbox.getInstance().getData().set("ITEMS." + ib + ".ITEM", stacks);
-                    Lootbox.getInstance().getData().saveAll();
+                    LootBox.getInstance().getData().set("ITEMS." + ib + ".ITEM", stacks);
+                    LootBox.getInstance().getData().saveAll();
                 } else {
-                    Lootbox.getInstance().getData().set("ITEMS." + ib, null);
-                    Lootbox.getInstance().getData().saveAll();
+                    LootBox.getInstance().getData().set("ITEMS." + ib, null);
+                    LootBox.getInstance().getData().saveAll();
                 }
             }
             ((Player) e.getPlayer()).sendMessage(CC.translate("&aYou sussesfuly edited the lootbox loot"));
@@ -90,7 +107,7 @@ public class lootbox implements Listener {
                 if (e.getInventory().getItem(i).isSimilar(Stacks.getRandomItem())) {
                     ItemStack stack = Plugin.getRandomItem().clone();
                     String reward = (stack.getItemMeta().getDisplayName() != null) ? stack.getItemMeta().getDisplayName() : stack.getType().name();
-                    p.sendMessage(CC.translate(Lootbox.getInstance().getConfig().getString("MESSAGES.RECEIVE").replace("%amount%", String.valueOf(stack.getAmount())).replace("%reward%", reward)));
+                    p.sendMessage(CC.translate(LootBox.getInstance().getConfig().getString("MESSAGES.RECEIVE").replace("%amount%", String.valueOf(stack.getAmount())).replace("%reward%", reward)));
                     if (!Plugin.isFull(p)) {
                         p.getInventory().addItem(stack);
                         p.updateInventory();

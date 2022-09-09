@@ -2,7 +2,7 @@ package me.d2siado.dev.Utils.files;
 
 import java.io.File;
 
-import me.d2siado.dev.Lootbox;
+import me.d2siado.dev.LootBox;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
@@ -12,7 +12,7 @@ public class ConfigFile extends YamlConfiguration
     private final Plugin plugin;
     private final File Config;
     private Plugin main() {
-        return Lootbox.getInstance();
+        return LootBox.getInstance();
     }
     public void save() {
         try {

@@ -1,8 +1,8 @@
-# Lootbox
+# LootBox
 
 [![Discord](https://img.shields.io/discord/907469832625193001?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://development.zyonpvp.us/)
 
-A special plugin of lootbox like AstralMC
+A special plugin of LootBox like AstralMC
 
 ## Free SourceCode
 
@@ -11,7 +11,7 @@ The sourcecode of this plugin is free on my github D2SIADO
 ## Features
 
 - Configurable in game
-- Gui to lootbox
+- Gui to LootBox
 
 ## Help and support
 

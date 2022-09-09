@@ -1,7 +1,7 @@
 package me.d2siado.dev.Utils;
 
 import com.google.common.collect.Lists;
-import me.d2siado.dev.Lootbox;
+import me.d2siado.dev.LootBox;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -33,27 +33,27 @@ public class Plugin {
 
     public static void registerListeners(List<Listener> listeners) {
         for (Listener listener : listeners) {
-            Bukkit.getPluginManager().registerEvents(listener, Lootbox.getInstance());
+            Bukkit.getPluginManager().registerEvents(listener, LootBox.getInstance());
         }
     }
 
     public static ItemStack getRandomItem() {
         Random random = new Random();
         List<String> items = Lists.newArrayList();
-        if (Lootbox.getInstance().getData().getConfigurationSection("ITEMS") == null
-        || Lootbox.getInstance().getData().getConfigurationSection("ITEMS").getKeys(false).isEmpty()) {
+        if (LootBox.getInstance().getData().getConfigurationSection("ITEMS") == null
+        || LootBox.getInstance().getData().getConfigurationSection("ITEMS").getKeys(false).isEmpty()) {
             ItemStack stack = new ItemStack(Material.PAPER, 1);
             ItemMeta meta = stack.getItemMeta();
             meta.setDisplayName(CC.translate("&cI dont find any reward"));
             stack.setItemMeta(meta);
             return stack;
         }
-        Lootbox.getInstance().getData().getConfigurationSection("ITEMS").getKeys(false).forEach((s) -> {
-            ItemStack stack = Lootbox.getInstance().getData().getItemStack("ITEMS." + s + ".ITEM").clone();
+        LootBox.getInstance().getData().getConfigurationSection("ITEMS").getKeys(false).forEach((s) -> {
+            ItemStack stack = LootBox.getInstance().getData().getItemStack("ITEMS." + s + ".ITEM").clone();
             if (stack != null && !stack.getType().equals(Material.AIR) && !stack.getType().equals(Material.STAINED_GLASS_PANE)) {
                 items.add(s);
             }
         });
-        return Lootbox.getInstance().getData().getItemStack("ITEMS." + items.get(random.nextInt(items.size())) + ".ITEM");
+        return LootBox.getInstance().getData().getItemStack("ITEMS." + items.get(random.nextInt(items.size())) + ".ITEM");
     }
 }

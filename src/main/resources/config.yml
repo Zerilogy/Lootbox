@@ -1,4 +1,4 @@
-# This plugins is a copy of astralmc lootbox
+# This plugins is a copy of astralmc LootBox
 # if you need help please contact me in discord D2SIADO#0001
 # this proyect was maked for ZyonPvP HCFactions and Kitmap...
 # -----------------------------------------------------------
@@ -8,15 +8,30 @@
 # |  - D2SIADO in twitter
 # -----------------------------------------------------------
 ICON:
-  DISPLAY-NAME: '&6&lZyonPvP &fPackage'
+  DISPLAY-NAME: '&6&lZyonPvP &fLootBox'
   MATERIAL: ENDER_CHEST
   MATERIAL-DATA: 0
   LORE:
-    - '&7» Right click to open the package'
+    - '&7» Right click to open the LootBox'
 CONFIG:
   AMOUNT: 2 # 1 or 2, if is higher the config was 2
+  FAST-OPEN: true
   PANES:
     TYPES: [1,2,3,4,5,6,14]
     GLOW: true
+  NAMES:
+    GUI-BOX: "LootBox"
+    GUI-LOOT: "LootBox Loot"
+  REWARD-STACK:
+    DISPLAY-NAME: '&aRandom Reward'
+    MATERIAL: CHEST
+    MATERIAL-DATA: 0
+    LORE:
+      - '&7» Click to recieve a random reward'
+  SOUNDS:
+    OPEN: "CHEST_OPEN"
+    REWARDS: "NOTE_PLING"
 MESSAGES:
   RECEIVE: "&aYou have received x%amount% %reward% &aon Package"
+  NO-PERMS: "&cNo enough permissions"
+  NO-CONSOLE: "&cOnly players can execute this command"
