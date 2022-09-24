@@ -31,6 +31,10 @@ CONFIG:
   SOUNDS:
     OPEN: "CHEST_OPEN"
     REWARDS: "NOTE_PLING"
+  PARTICLES:
+    OPEN: "CLOUD"
+    REWARDS: "CRIT"
+    AMOUNT: 10
 MESSAGES:
   RECEIVE: "&aYou have received x%amount% %reward% &aon Package"
   NO-PERMS: "&cNo enough permissions"

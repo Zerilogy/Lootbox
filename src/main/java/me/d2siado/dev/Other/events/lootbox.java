@@ -4,6 +4,7 @@ import me.d2siado.dev.LootBox;
 import me.d2siado.dev.Utils.CC;
 import me.d2siado.dev.Utils.Plugin;
 import me.d2siado.dev.Utils.Stacks;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -22,6 +23,12 @@ public class lootbox implements Listener {
             if (e.getItem() != null && e.getItem().isSimilar(Stacks.getLootboxItem(1))) {
                 e.setCancelled(true);
                 e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.valueOf(LootBox.getInstance().getConfig().getString("CONFIG.SOUNDS.OPEN")), 1.0F, 1.0F);
+                for (int i = 0; i < LootBox.getInstance().getConfig().getInt("CONFIG.PARTICLES.AMOUNT"); i++) {
+                    if (LootBox.getInstance().getConfig().getString("CONFIG.PARTICLES.OPEN").equalsIgnoreCase("None")) {
+                        return;
+                    }
+                    e.getPlayer().playEffect(e.getPlayer().getLocation(), Effect.valueOf(LootBox.getInstance().getConfig().getString("CONFIG.PARTICLES.OPEN")), (short)0);
+                }
                 if (e.getItem().getAmount() > 1) {
                     e.getItem().setAmount(e.getItem().getAmount()-1);
                 } else {
@@ -58,6 +65,12 @@ public class lootbox implements Listener {
         && e.getClickedInventory().equals(e.getInventory())) {
             e.setCancelled(true);
             if (e.getCurrentItem().isSimilar(Stacks.getRandomItem())) {
+                for (int i = 0; i < LootBox.getInstance().getConfig().getInt("CONFIG.PARTICLES.AMOUNT"); i++) {
+                    if (LootBox.getInstance().getConfig().getString("CONFIG.PARTICLES.REWARDS").equalsIgnoreCase("None")) {
+                        return;
+                    }
+                    p.playEffect(p.getLocation(), Effect.valueOf(LootBox.getInstance().getConfig().getString("CONFIG.PARTICLES.REWARDS")), (short)0);
+                }
                 ItemStack stack = Plugin.getRandomItem().clone();
                 String reward = (stack.getItemMeta().getDisplayName() != null) ? stack.getItemMeta().getDisplayName() : stack.getType().name();
                 p.sendMessage(CC.translate(LootBox.getInstance().getConfig().getString("MESSAGES.RECEIVE").replace("%amount%", String.valueOf(stack.getAmount())).replace("%reward%", reward)));
@@ -90,7 +103,7 @@ public class lootbox implements Listener {
                 if (stacks != null && !stacks.getType().equals(Material.AIR)) {
                     if (LootBox.getInstance().getData().get("ITEMS." + ib) != null) {
                         ItemStack stack = LootBox.getInstance().getData().getItemStack("ITEMS." + ib + ".ITEM").clone();
-                        if (stack.isSimilar(stacks)) continue;
+                        if (stack.equals(stacks)) continue;
                     }
                     LootBox.getInstance().getData().set("ITEMS." + ib + ".ITEM", stacks);
                     LootBox.getInstance().getData().saveAll();

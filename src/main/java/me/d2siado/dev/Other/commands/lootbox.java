@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class lootbox implements CommandExecutor {
     @Override
@@ -36,12 +37,25 @@ public class lootbox implements CommandExecutor {
                 return true;
             }
             final String playerarg = strings[1];
-            Player target = Bukkit.getPlayer(playerarg);
-            if (target == null) {
-                sender.sendMessage(CC.translate("&c" + playerarg + " player doesnt exists..."));
-                return true;
-            } else if (!target.isOnline()) {
-                sender.sendMessage(CC.translate("&c" + target.getName() + " inst online..."));
+            if (!playerarg.equalsIgnoreCase("all")) {
+                Player target = Bukkit.getPlayer(playerarg);
+                if (target == null) {
+                    sender.sendMessage(CC.translate("&c" + playerarg + " player doesnt exists..."));
+                    return true;
+                } else if (!target.isOnline()) {
+                    sender.sendMessage(CC.translate("&c" + target.getName() + " inst online..."));
+                    return true;
+                }
+                if (!Plugin.isInt(strings[2])) {
+                    sender.sendMessage(CC.translate("&cEnter a valid item amount..."));
+                    return true;
+                }
+                final int amount = Integer.parseInt(strings[2]);
+                if (Plugin.isFull(target)) {
+                    target.getWorld().dropItem(target.getLocation(), Stacks.getLootboxItem(amount));
+                    return true;
+                }
+                target.getInventory().addItem(Stacks.getLootboxItem(amount));
                 return true;
             }
             if (!Plugin.isInt(strings[2])) {
@@ -49,11 +63,13 @@ public class lootbox implements CommandExecutor {
                 return true;
             }
             final int amount = Integer.parseInt(strings[2]);
-            if (Plugin.isFull(target)) {
-                target.getWorld().dropItem(target.getLocation(), Stacks.getLootboxItem(amount));
-                return true;
+            for (Player target : Bukkit.getOnlinePlayers()) {
+                if (Plugin.isFull(target)) {
+                    target.getWorld().dropItem(target.getLocation(), Stacks.getLootboxItem(amount));
+                    return true;
+                }
+                target.getInventory().addItem(Stacks.getLootboxItem(amount));
             }
-            target.getInventory().addItem(Stacks.getLootboxItem(amount));
         } else if ("loot".equalsIgnoreCase(strings[0])) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(CC.translate(LootBox.getInstance().getConfig().getString("MESSAGES.NO-CONSOLE")));

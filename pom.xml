@@ -6,7 +6,7 @@
 
     <groupId>me.d2siado.dev</groupId>
     <artifactId>LootBox</artifactId>
-    <version>1.0-SnapShot</version>
+    <version>1.1-SnapShot</version>
     <packaging>jar</packaging>
 
     <name>LootBox</name>
